@@ -1,2 +1,2 @@
 # Storlet-API
-API definition of Swift Storlets
+API definition for Swift Storlets
