@@ -1,0 +1,1641 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Storlets API</title>
+    <link href="css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/idea.css">
+    <script src="js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="js/toc-resize.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/api-specification.css"> 
+    
+
+
+    
+</head>
+<body id="respecDocument" class="h-entry">
+<div class="container">
+
+
+  <div id="TOC-container">
+    
+<div id="fiware-logo-container">
+    <div id="fiware-logo"></div>
+</div>
+<nav id="toc">
+
+        
+    <ul class="toc">
+
+        
+	        
+        
+
+
+<li><a href="#api-summary">API Summary</a></li>
+
+
+    
+    
+
+
+
+
+
+
+
+<li><a href="#API_specification">API Specification</a>
+    <ul class="toc">
+    
+
+                        <li>
+                            
+                                <a href="#resource_group_storlets" title = "Group Storlets">Group Storlets</a>
+                            
+                            <ul class="toc">
+                              
+                                
+                                    <li>
+                                        <a href="#resource_storlets" title = "Resource Storlets">Resource Storlets</a>
+                                        <ul class="toc  ">
+                                        
+                                            
+                                                <li><a href="#action_list-all-storlets" title ="GET - List All Storlets">GET - List All Storlets</a></li>
+                                            
+
+                                        
+                                        </ul>
+                                    </li>
+                                
+                              
+                                
+                                    <li>
+                                        <a href="#resource_storlet" title = "Resource Storlet">Resource Storlet</a>
+                                        <ul class="toc  ">
+                                        
+                                            
+                                                <li><a href="#action_upload-a-new-storlet" title ="PUT - Upload a New Storlet">PUT - Upload a New Storlet</a></li>
+                                            
+
+                                        
+                                        </ul>
+                                    </li>
+                                
+                              
+                            </ul>
+                        </li>
+                      
+
+                        <li>
+                            
+                                <a href="#resource_group_dependency" title = "Group Dependency">Group Dependency</a>
+                            
+                            <ul class="toc">
+                              
+                                
+                                    <li>
+                                        <a href="#resource_operations-on-dependencies" title = "Resource Operations on dependencies">Resource Operations on dependencies</a>
+                                        <ul class="toc  ">
+                                        
+                                            
+                                                <li><a href="#action_upload-a-new-dependency" title ="PUT - Upload a New Dependency">PUT - Upload a New Dependency</a></li>
+                                            
+
+                                        
+                                        </ul>
+                                    </li>
+                                
+                              
+                            </ul>
+                        </li>
+                      
+
+                        <li>
+                            
+                                <a href="#resource_group_storlets-invocation" title = "Group Storlets Invocation">Group Storlets Invocation</a>
+                            
+                            <ul class="toc">
+                              
+                                
+                                    <li>
+                                        <a href="#resource_invocation" title = "Resource Invocation">Resource Invocation</a>
+                                        <ul class="toc  ">
+                                        
+                                            
+                                                <li><a href="#action_invoke-a-storlet-upon-object-download" title ="GET - Invoke a storlet upon object download">GET - Invoke a storlet upon object download</a></li>
+                                            
+
+                                        
+                                            
+                                                <li><a href="#action_invoke-a-storlet-upon-object-upload" title ="PUT - Invoke a storlet upon object upload">PUT - Invoke a storlet upon object upload</a></li>
+                                            
+
+                                        
+                                        </ul>
+                                    </li>
+                                
+                              
+                            </ul>
+                        </li>
+                      
+    <li><a href="#examples">Examples</a></li>
+    </ul>
+</li>
+    
+    
+    
+   </ul>
+</nav>
+
+  </div>
+  
+
+
+  <div id="API-content">
+  
+    
+	
+
+
+
+	
+
+
+
+
+
+	
+	
+	
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+<hr>
+
+
+	<h2 id="abstract">Abstract</h2>
+	<p>Swift Storlets extend Swift with the capability to run computation near the data
+in a secure and isolated manner.
+With Swift Storlets a user can write code, package and deploy it as a Swift object,
+and then explicitly invoke it on data objects as if the code was part of the Swift pipeline.
+We use the term Storlet to refer to the binary code deployed as a Swift object.
+Invoking a Storlet on a data object is done in an isolated manner so that the data
+accessible by the computation is only the object's data and its user metadata.
+Moreover, the computation has no access to disks, network or to the Swift request environment.</p>
+
+
+
+
+<hr>
+  
+
+
+    
+    
+<nav class="api-summary">
+<h1 id="api-summary"> API Summary </h1>
+    <ul>
+
+
+    
+
+        <li>
+            
+                <a href="#resource_group_storlets" title = "Storlets">Storlets</a>
+            
+            <ul>
+              
+                
+                    <li>
+                        <a href="#resource_storlets" title = "Resource Storlets">
+                        
+                            Storlets
+                        
+                        </a>
+                        <ul class="toc  ">
+                        
+                            
+                                <li>
+                                    <a href="#action_list-all-storlets" title ="GET - List All Storlets"><span class="actionMethod">GET</span> - List All Storlets
+                                    
+                                        
+                                            [/storlet]
+                                        
+                                    
+                                    </a>
+                                </li>
+                            
+
+                        
+                        </ul>
+                    </li>
+                
+              
+                
+                    <li>
+                        <a href="#resource_storlet" title = "Resource Storlet">
+                        
+                            Storlet
+                        
+                        </a>
+                        <ul class="toc  ">
+                        
+                            
+                                <li>
+                                    <a href="#action_upload-a-new-storlet" title ="PUT - Upload a New Storlet"><span class="actionMethod">PUT</span> - Upload a New Storlet
+                                    
+                                        
+                                            [/storlet/{storlet_object_name}]
+                                        
+                                    
+                                    </a>
+                                </li>
+                            
+
+                        
+                        </ul>
+                    </li>
+                
+              
+            </ul>
+        </li>
+      
+
+        <li>
+            
+                <a href="#resource_group_dependency" title = "Dependency">Dependency</a>
+            
+            <ul>
+              
+                
+                    <li>
+                        <a href="#resource_operations-on-dependencies" title = "Resource Operations on dependencies">
+                        
+                            Operations on dependencies
+                        
+                        </a>
+                        <ul class="toc  ">
+                        
+                            
+                                <li>
+                                    <a href="#action_upload-a-new-dependency" title ="PUT - Upload a New Dependency"><span class="actionMethod">PUT</span> - Upload a New Dependency
+                                    
+                                        
+                                            [/dependency/{dependency_object_name}]
+                                        
+                                    
+                                    </a>
+                                </li>
+                            
+
+                        
+                        </ul>
+                    </li>
+                
+              
+            </ul>
+        </li>
+      
+
+        <li>
+            
+                <a href="#resource_group_storlets-invocation" title = "Storlets Invocation">Storlets Invocation</a>
+            
+            <ul>
+              
+                
+                    <li>
+                        <a href="#resource_invocation" title = "Resource Invocation">
+                        
+                            Invocation
+                        
+                        </a>
+                        <ul class="toc  ">
+                        
+                            
+                                <li>
+                                    <a href="#action_invoke-a-storlet-upon-object-download" title ="GET - Invoke a storlet upon object download"><span class="actionMethod">GET</span> - Invoke a storlet upon object download
+                                    
+                                        
+                                            [/{container_name}/{object_name}]
+                                        
+                                    
+                                    </a>
+                                </li>
+                            
+
+                        
+                            
+                                <li>
+                                    <a href="#action_invoke-a-storlet-upon-object-upload" title ="PUT - Invoke a storlet upon object upload"><span class="actionMethod">PUT</span> - Invoke a storlet upon object upload
+                                    
+                                        
+                                            [/{container_name}/{object_name}]
+                                        
+                                    
+                                    </a>
+                                </li>
+                            
+
+                        
+                        </ul>
+                    </li>
+                
+              
+            </ul>
+        </li>
+      
+
+    </ul>
+</nav>
+
+    
+    
+
+
+
+
+		
+	
+	
+
+
+
+
+
+	
+
+
+
+    
+
+  
+  <section id="API_specification">
+      <h1>API Specification</h1>
+      
+
+
+
+
+        
+            <section id="resource_group_storlets" class="resourceGroup">
+            <h2 id="h-resource_group_storlets">Storlets</h2>
+        
+	
+        
+            <section id="resource_storlets" class="resource">
+                 <div class= "header" >
+                 
+                    <h3 id="h-resource_storlets">Storlets</h3>
+                    <span class="extra-header">[/storlet]</span>
+                 
+                 </div>
+                <p>Storlets are uploaded to a special container called 'storlet'.
+Therefore, '/storlet' shows up in the url of various operations,
+such as to upload a storlet or to list all of the available storlets.</p>
+                
+                
+
+		        
+                
+                
+
+
+
+
+
+
+    
+
+
+                
+
+
+                    
+                        <div id="action_list-all-storlets" class="action GET">
+
+                        
+    <div class="header">
+        
+            <h4 id="h-action_list-all-storlets">List All Storlets </h4>
+            <span class="extra-header">
+		GET 
+                
+                    /storlet
+                
+            </span>
+        
+
+    </div>
+
+        
+                            <div id="list-all-storlets_body" class="">
+                                
+                                
+                                
+                                
+			
+                                
+                                
+      
+                                    
+        	                            
+    
+        	                            
+        		                            
+                                        
+                                        
+                                        
+
+<div class="rest-packet-div">
+
+            <span class="packetType">Response 200</span> 
+        
+            (application/json)
+        
+    
+            
+            
+     
+</div>
+        	                            
+                                    
+                                    <div>
+                                    <div class="goExample">
+                                        <a href="#action_list-all-storlets_examples">Go to example</a>
+                                    </div>
+                                    
+                                        
+    <div class="goApiary">
+    
+        
+    
+    </div>
+
+                                    
+                                    </div>
+                                
+                            </div>
+                        </div>
+                    
+            </section>
+        
+            <section id="resource_storlet" class="resource">
+                 <div class= "header" >
+                 
+                    <h3 id="h-resource_storlet">Storlet</h3>
+                    <span class="extra-header">[/storlet/{storlet_object_name}]</span>
+                 
+                 </div>
+                
+                
+                
+
+		        
+                
+                
+
+
+
+
+
+
+    
+
+
+                
+
+
+                    
+                        <div id="action_upload-a-new-storlet" class="action PUT">
+
+                        
+    <div class="header">
+        
+            <h4 id="h-action_upload-a-new-storlet">Upload a New Storlet </h4>
+            <span class="extra-header">
+		PUT 
+                
+                    /storlet/{storlet_object_name}
+                
+            </span>
+        
+
+    </div>
+
+        
+                            <div id="upload-a-new-storlet_body" class="">
+                                <p>You may write a storlet in Java according to the instructions in the Developer's manual and upload it to the Object Store.
+The storlet is uploaded to the container named 'storlet', so '/storlet' appears in the url.
+The storlet may depend on other existing libraries, which must first be uploaded to the dependency container.
+When uploading a storlet,
+the X-Object-Meta-Storlet-Dependency header requires a value that is a comma separated list of dependencies.
+The main_class_name parameter for the X-Object-Meta-Storlet-Main header specifies the class in which the invoke 
+method of the storlet is defined.
+The X-Object-Meta-Storlet-Language header specified the language in which the storlet is run.
+At present, only 'Java' is supported.
+The X-Object-Meta-Storlet-Interface-Version header should be provided and set to the value '1.0'.
+Although not currently used, the X-Object-Meta-Storlet-Object-Metadata header must be provided and set to 'no'.
+See the Storlets Developer's manual for details of the signature of the invoke method.
+The content-type of the request should be set to 'application/octet-stream'.</p>
+                                
+                                
+                                
+			
+                                
+                                
+      
+                                    
+        	                            
+                                            
+                                            
+                                            
+                                            
+
+<div class="rest-packet-div">
+
+            <span class="packetType">Request </span> 
+        
+            (application/octet-stream)
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+            
+            
+     
+</div>
+        	                            
+    
+        	                            
+        		                            
+                                        
+                                        
+                                        
+
+<div class="rest-packet-div">
+
+            <span class="packetType">Response 201</span> 
+            
+            
+     
+</div>
+        	                            
+                                    
+                                    <div>
+                                    <div class="goExample">
+                                        <a href="#action_upload-a-new-storlet_examples">Go to example</a>
+                                    </div>
+                                    
+                                        
+    <div class="goApiary">
+    
+        
+    
+    </div>
+
+                                    
+                                    </div>
+                                
+                            </div>
+                        </div>
+                    
+            </section>
+        
+    </section>
+
+        
+            <section id="resource_group_dependency" class="resourceGroup">
+            <h2 id="h-resource_group_dependency">Dependency</h2>
+        
+	
+        
+            <section id="resource_operations-on-dependencies" class="resource">
+                 <div class= "header" >
+                 
+                    <h3 id="h-resource_operations-on-dependencies">Operations on dependencies</h3>
+                    <span class="extra-header">[/dependency/{dependency_object_name}]</span>
+                 
+                 </div>
+                
+                
+                
+
+		        
+                
+                
+
+
+
+
+
+
+    
+
+
+                
+
+
+                    
+                        <div id="action_upload-a-new-dependency" class="action PUT">
+
+                        
+    <div class="header">
+        
+            <h4 id="h-action_upload-a-new-dependency">Upload a New Dependency </h4>
+            <span class="extra-header">
+		PUT 
+                
+                    /dependency/{dependency_object_name}
+                
+            </span>
+        
+
+    </div>
+
+        
+                            <div id="upload-a-new-dependency_body" class="">
+                                <p>You may create and upload your own libraries to assist in running a storlet.
+These dependencies are uploaded to a special container named 'dependency'.
+For an executable dependency (such as a compiled c program),
+you must specify the X-Object-Meta-Storlet-Dependency-Permissions header.
+Otherwise, that header may be omitted.
+The name of the library containing the dependency (i.e. dependency_name) goes into the URI.
+The content-type of the request should be set to 'application/octet-stream'.</p>
+                                
+                                
+                                
+			
+                                
+                                
+      
+                                    
+        	                            
+                                            
+                                            
+                                            
+                                            
+
+<div class="rest-packet-div">
+
+            <span class="packetType">Request </span> 
+        
+            (application/octet-stream)
+        
+    
+        
+    
+        
+    
+            
+            
+     
+</div>
+        	                            
+    
+        	                            
+        		                            
+                                        
+                                        
+                                        
+
+<div class="rest-packet-div">
+
+            <span class="packetType">Response 201</span> 
+            
+            
+     
+</div>
+        	                            
+                                    
+                                    <div>
+                                    <div class="goExample">
+                                        <a href="#action_upload-a-new-dependency_examples">Go to example</a>
+                                    </div>
+                                    
+                                        
+    <div class="goApiary">
+    
+        
+    
+    </div>
+
+                                    
+                                    </div>
+                                
+                            </div>
+                        </div>
+                    
+            </section>
+        
+    </section>
+
+        
+            <section id="resource_group_storlets-invocation" class="resourceGroup">
+            <h2 id="h-resource_group_storlets-invocation">Storlets Invocation</h2>
+        
+	<p>Once the storlet and its dependencies are deployed the storlet is ready for invocation.
+Storlets can be invoked in 2 ways:
+(1) Invocation upon GET.
+In this case the user gets a transformation of the object residing in the store (as opposed to the actual object).
+One use case for GET is anonymization, where the user might not have access to certain data unless it is
+being anonymized by some storlet.
+(2) Invocation upon PUT.
+In this case the data kept in the object store is a transformation of the object uploaded by the user
+(as opposed to the original data or metadata).
+A typical use case is metadata enrichment, where a Storlet extracts format specific metadata from the uploaded data
+and adds it as Swift metadata.</p>
+<p>Invocation involves adding an extra header ('X-Run-Storlet') to the Swift original PUT/GET requests. </p>
+        
+            <section id="resource_invocation" class="resource">
+                 <div class= "header" >
+                 
+                    <h3 id="h-resource_invocation">Invocation</h3>
+                    <span class="extra-header">[/{container_name}/{object_name}]</span>
+                 
+                 </div>
+                
+                
+                
+
+		        
+                
+                
+
+
+
+
+
+
+    
+
+
+                
+
+
+                    
+                        <div id="action_invoke-a-storlet-upon-object-download" class="action GET">
+
+                        
+    <div class="header">
+        
+            <h4 id="h-action_invoke-a-storlet-upon-object-download">Invoke a storlet upon object download </h4>
+            <span class="extra-header">
+		GET 
+                
+                    /{container_name}/{object_name}
+                
+            </span>
+        
+
+    </div>
+
+        
+                            <div id="invoke-a-storlet-upon-object-download_body" class="">
+                                <p>An additional header ('X-Run-Storlet') must be provided to inform the system to run a storlet.</p>
+                                
+                                
+                                
+			
+                                
+                                
+      
+                                    
+        	                            
+                                            
+                                            
+                                            
+                                            
+
+<div class="rest-packet-div">
+
+            <span class="packetType">Request </span> 
+        
+    
+            
+            
+     
+</div>
+        	                            
+    
+        	                            
+        		                            
+                                        
+                                        
+                                        
+
+<div class="rest-packet-div">
+
+            <span class="packetType">Response 200</span> 
+            
+            
+     
+</div>
+        	                            
+                                    
+                                    <div>
+                                    <div class="goExample">
+                                        <a href="#action_invoke-a-storlet-upon-object-download_examples">Go to example</a>
+                                    </div>
+                                    
+                                        
+    <div class="goApiary">
+    
+        
+    
+    </div>
+
+                                    
+                                    </div>
+                                
+                            </div>
+                        </div>
+                    
+                        <div id="action_invoke-a-storlet-upon-object-upload" class="action PUT">
+
+                        
+    <div class="header">
+        
+            <h4 id="h-action_invoke-a-storlet-upon-object-upload">Invoke a storlet upon object upload </h4>
+            <span class="extra-header">
+		PUT 
+                
+                    /{container_name}/{object_name}
+                
+            </span>
+        
+
+    </div>
+
+        
+                            <div id="invoke-a-storlet-upon-object-upload_body" class="">
+                                <p>An additional header ('X-Run-Storlet') must be provided to inform the system to run a storlet.</p>
+                                
+                                
+                                
+			
+                                
+                                
+      
+                                    
+        	                            
+                                            
+                                            
+                                            
+                                            
+
+<div class="rest-packet-div">
+
+            <span class="packetType">Request </span> 
+        
+    
+            
+            
+     
+</div>
+        	                            
+    
+        	                            
+        		                            
+                                        
+                                        
+                                        
+
+<div class="rest-packet-div">
+
+            <span class="packetType">Response 201</span> 
+            
+            
+     
+</div>
+        	                            
+                                    
+                                    <div>
+                                    <div class="goExample">
+                                        <a href="#action_invoke-a-storlet-upon-object-upload_examples">Go to example</a>
+                                    </div>
+                                    
+                                        
+    <div class="goApiary">
+    
+        
+    
+    </div>
+
+                                    
+                                    </div>
+                                
+                            </div>
+                        </div>
+                    
+            </section>
+        
+    </section>
+
+<section id="examples">
+    <div class= "header" ><h2>Examples</h2> </div>
+    
+        
+            <section id="resource_group_storlets_example" class="resourceGroupExample">
+                <div class= "header" ><h3 id="h-resource_group_storlets_example">Storlets</h3> </div>
+        
+
+                
+                    <section id="resource_storlets_example" class="resourceExample">
+                         <div class= "header" >
+                         
+                            <h4 id="h-resource_storlets_example">Storlets</h4>
+                            <span class="extra-header">[/storlet]</span>
+                         
+                         </div>
+
+                            
+                            
+                            
+
+                            
+                            
+                            
+
+                           
+
+                            
+                                <div id="action_list-all-storlets_examples" class="actionExample GET">
+
+                                    
+    <div class="header">
+        
+            <h5 id="h-action_list-all-storlets_examples">List All Storlets </h5>
+            <span class="extra-header">
+		GET 
+                
+                    /storlet
+                
+            </span>
+        
+
+    </div>
+
+                
+                                    <div id="action_list-all-storlets_body" class=""> 
+                                        
+                                        
+                                        
+                                                 
+                                        
+                                            
+                                            
+                                                
+            
+                                                
+                                                    
+                                                
+                                                
+                                                
+
+<div class="rest-packet-div">
+
+            <span class="packetType">Response 200</span> 
+        
+            (application/json)
+        
+    
+            
+            
+            
+            
+
+
+
+ 
+            <div id="action_list-all-storlets_Response_1_body" class=" action-div-body">
+                <p></p>
+
+                
+        	         <div class= "header"><p>Headers</p></div>
+                    
+                    
+                        
+                    
+
+        	        <pre><code>Content-Type: application/json</code></pre>
+                
+
+                
+                    <div class= "header"><p>Body</p></div>
+                    <pre><code>[
+    storlet1,
+    storlet2,
+    storlet3
+]
+</code></pre>
+                
+
+                
+            </div>
+            
+            
+     
+</div>
+                                                
+                                            
+                                            <div class="goActions">
+                                                <a href="#action_list-all-storlets">Go to specification</a>
+                                            </div>
+                                    </div>
+                                </div>
+                            
+                    </section>
+            
+                    <section id="resource_storlet_example" class="resourceExample">
+                         <div class= "header" >
+                         
+                            <h4 id="h-resource_storlet_example">Storlet</h4>
+                            <span class="extra-header">[/storlet/{storlet_object_name}]</span>
+                         
+                         </div>
+
+                            
+                            
+                            
+
+                            
+                            
+                            
+
+                           
+
+                            
+                                <div id="action_upload-a-new-storlet_examples" class="actionExample PUT">
+
+                                    
+    <div class="header">
+        
+            <h5 id="h-action_upload-a-new-storlet_examples">Upload a New Storlet </h5>
+            <span class="extra-header">
+		PUT 
+                
+                    /storlet/{storlet_object_name}
+                
+            </span>
+        
+
+    </div>
+
+                
+                                    <div id="action_upload-a-new-storlet_body" class=""> 
+                                        
+                                        
+                                        
+                                                 
+                                        
+                                            
+                                            
+                                                
+                                                    
+                                                    
+                                                    
+                                                    
+
+<div class="rest-packet-div">
+
+            <span class="packetType">Request </span> 
+        
+            (application/octet-stream)
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+            
+            
+            
+            
+
+
+
+ 
+            <div id="action_upload-a-new-storlet_Request_1_body" class=" action-div-body">
+                <p></p>
+
+                
+        	         <div class= "header"><p>Headers</p></div>
+                    
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+
+        	        <pre><code>Content-Type: application/octet-stream
+&#39;X-Object-Meta-Storlet-Language&#39;: &#39;Java&#39;
+&#39;X-Object-Meta-Storlet-Interface-Version&#39;: &#39;1.0&#39;
+&#39;X-Object-Meta-Storlet-Dependency&#39;: dependencies
+&#39;X-Object-Meta-Storlet-Object-Metadata&#39;: &#39;no&#39;
+&#39;X-Object-Meta-Storlet-Main&#39;: main_class_name</code></pre>
+                
+
+                
+
+                
+            </div>
+            
+            
+     
+</div>
+                                                
+            
+                                                
+                                                    
+                                                
+                                                
+                                                
+
+<div class="rest-packet-div">
+
+            <span class="packetType">Response 201</span> 
+            
+            
+            
+            
+
+
+
+ 
+            <div id="action_upload-a-new-storlet_Response_1_body" class=" action-div-body">
+                <p></p>
+
+                
+
+                
+
+                
+            </div>
+            
+            
+     
+</div>
+                                                
+                                            
+                                            <div class="goActions">
+                                                <a href="#action_upload-a-new-storlet">Go to specification</a>
+                                            </div>
+                                    </div>
+                                </div>
+                            
+                    </section>
+            
+        </section>
+    
+        
+            <section id="resource_group_dependency_example" class="resourceGroupExample">
+                <div class= "header" ><h3 id="h-resource_group_dependency_example">Dependency</h3> </div>
+        
+
+                
+                    <section id="resource_operations-on-dependencies_example" class="resourceExample">
+                         <div class= "header" >
+                         
+                            <h4 id="h-resource_operations-on-dependencies_example">Operations on dependencies</h4>
+                            <span class="extra-header">[/dependency/{dependency_object_name}]</span>
+                         
+                         </div>
+
+                            
+                            
+                            
+
+                            
+                            
+                            
+
+                           
+
+                            
+                                <div id="action_upload-a-new-dependency_examples" class="actionExample PUT">
+
+                                    
+    <div class="header">
+        
+            <h5 id="h-action_upload-a-new-dependency_examples">Upload a New Dependency </h5>
+            <span class="extra-header">
+		PUT 
+                
+                    /dependency/{dependency_object_name}
+                
+            </span>
+        
+
+    </div>
+
+                
+                                    <div id="action_upload-a-new-dependency_body" class=""> 
+                                        
+                                        
+                                        
+                                                 
+                                        
+                                            
+                                            
+                                                
+                                                    
+                                                    
+                                                    
+                                                    
+
+<div class="rest-packet-div">
+
+            <span class="packetType">Request </span> 
+        
+            (application/octet-stream)
+        
+    
+        
+    
+        
+    
+            
+            
+            
+            
+
+
+
+ 
+            <div id="action_upload-a-new-dependency_Request_1_body" class=" action-div-body">
+                <p></p>
+
+                
+        	         <div class= "header"><p>Headers</p></div>
+                    
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+
+        	        <pre><code>Content-Type: application/octet-stream
+&#39;X-Object-Meta-Storlet-Dependency-Version&#39;: &#39;1&#39;
+&#39;X-Object-Meta-Storlet-Dependency-Permissions&#39;: &#39;0755&#39;</code></pre>
+                
+
+                
+
+                
+            </div>
+            
+            
+     
+</div>
+                                                
+            
+                                                
+                                                    
+                                                
+                                                
+                                                
+
+<div class="rest-packet-div">
+
+            <span class="packetType">Response 201</span> 
+            
+            
+            
+            
+
+
+
+ 
+            <div id="action_upload-a-new-dependency_Response_1_body" class=" action-div-body">
+                <p></p>
+
+                
+
+                
+
+                
+            </div>
+            
+            
+     
+</div>
+                                                
+                                            
+                                            <div class="goActions">
+                                                <a href="#action_upload-a-new-dependency">Go to specification</a>
+                                            </div>
+                                    </div>
+                                </div>
+                            
+                    </section>
+            
+        </section>
+    
+        
+            <section id="resource_group_storlets-invocation_example" class="resourceGroupExample">
+                <div class= "header" ><h3 id="h-resource_group_storlets-invocation_example">Storlets Invocation</h3> </div>
+        
+
+                
+                    <section id="resource_invocation_example" class="resourceExample">
+                         <div class= "header" >
+                         
+                            <h4 id="h-resource_invocation_example">Invocation</h4>
+                            <span class="extra-header">[/{container_name}/{object_name}]</span>
+                         
+                         </div>
+
+                            
+                            
+                            
+
+                            
+                            
+                            
+
+                           
+
+                            
+                                <div id="action_invoke-a-storlet-upon-object-download_examples" class="actionExample GET">
+
+                                    
+    <div class="header">
+        
+            <h5 id="h-action_invoke-a-storlet-upon-object-download_examples">Invoke a storlet upon object download </h5>
+            <span class="extra-header">
+		GET 
+                
+                    /{container_name}/{object_name}
+                
+            </span>
+        
+
+    </div>
+
+                
+                                    <div id="action_invoke-a-storlet-upon-object-download_body" class=""> 
+                                        
+                                        
+                                        
+                                                 
+                                        
+                                            
+                                            
+                                                
+                                                    
+                                                    
+                                                    
+                                                    
+
+<div class="rest-packet-div">
+
+            <span class="packetType">Request </span> 
+        
+    
+            
+            
+            
+            
+
+
+
+ 
+            <div id="action_invoke-a-storlet-upon-object-download_Request_1_body" class=" action-div-body">
+                <p></p>
+
+                
+        	         <div class= "header"><p>Headers</p></div>
+                    
+                    
+                        
+                    
+
+        	        <pre><code>&#39;X-Run-Storlet&#39;: storlet_name</code></pre>
+                
+
+                
+
+                
+            </div>
+            
+            
+     
+</div>
+                                                
+            
+                                                
+                                                    
+                                                
+                                                
+                                                
+
+<div class="rest-packet-div">
+
+            <span class="packetType">Response 200</span> 
+            
+            
+            
+            
+
+
+
+ 
+            <div id="action_invoke-a-storlet-upon-object-download_Response_1_body" class=" action-div-body">
+                <p></p>
+
+                
+
+                
+
+                
+            </div>
+            
+            
+     
+</div>
+                                                
+                                            
+                                            <div class="goActions">
+                                                <a href="#action_invoke-a-storlet-upon-object-download">Go to specification</a>
+                                            </div>
+                                    </div>
+                                </div>
+                            
+                                <div id="action_invoke-a-storlet-upon-object-upload_examples" class="actionExample PUT">
+
+                                    
+    <div class="header">
+        
+            <h5 id="h-action_invoke-a-storlet-upon-object-upload_examples">Invoke a storlet upon object upload </h5>
+            <span class="extra-header">
+		PUT 
+                
+                    /{container_name}/{object_name}
+                
+            </span>
+        
+
+    </div>
+
+                
+                                    <div id="action_invoke-a-storlet-upon-object-upload_body" class=""> 
+                                        
+                                        
+                                        
+                                                 
+                                        
+                                            
+                                            
+                                                
+                                                    
+                                                    
+                                                    
+                                                    
+
+<div class="rest-packet-div">
+
+            <span class="packetType">Request </span> 
+        
+    
+            
+            
+            
+            
+
+
+
+ 
+            <div id="action_invoke-a-storlet-upon-object-upload_Request_1_body" class=" action-div-body">
+                <p></p>
+
+                
+        	         <div class= "header"><p>Headers</p></div>
+                    
+                    
+                        
+                    
+
+        	        <pre><code>&#39;X-Run-Storlet&#39;: storlet_name</code></pre>
+                
+
+                
+
+                
+            </div>
+            
+            
+     
+</div>
+                                                
+            
+                                                
+                                                    
+                                                
+                                                
+                                                
+
+<div class="rest-packet-div">
+
+            <span class="packetType">Response 201</span> 
+            
+            
+            
+            
+
+
+
+ 
+            <div id="action_invoke-a-storlet-upon-object-upload_Response_1_body" class=" action-div-body">
+                <p></p>
+
+                
+
+                
+
+                
+            </div>
+            
+            
+     
+</div>
+                                                
+                                            
+                                            <div class="goActions">
+                                                <a href="#action_invoke-a-storlet-upon-object-upload">Go to specification</a>
+                                            </div>
+                                    </div>
+                                </div>
+                            
+                    </section>
+            
+        </section>
+    
+
+
+
+</section>
+  </section>
+  
+   
+
+
+
+    
+    
+    
+  </div>
+</div>
+</body>
+
+</html>
